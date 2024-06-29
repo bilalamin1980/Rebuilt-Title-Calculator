@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rebuilt Title Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .input-group {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .input-group label {
+            margin-right: 5px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-left: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Rebuilt Title Calculator</h2>
+        <div class="input-group">
+            <label for="carValue">Original Car Value ($):</label>
+            <input type="number" id="carValue" placeholder="$0.00">
+        </div>
+        <div class="input-group">
+            <label for="repairCost">Total Repair Cost ($):</label>
+            <input type="number" id="repairCost" placeholder="$0.00">
+        </div>
+        <button onclick="calculateRebuiltValue()">Calculate</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateRebuiltValue() {
+            const carValue = parseFloat(document.getElementById('carValue').value.replace(/[^0-9.-]+/g, ""));
+            const repairCost = parseFloat(document.getElementById('repairCost').value.replace(/[^0-9.-]+/g, ""));
+
+            if (isNaN(carValue) || isNaN(repairCost)) {
+                document.getElementById('result').textContent = 'Please enter valid numbers.';
+                return;
+            }
+
+            const valueAfterLoss = carValue - repairCost;
+            const rebuiltValue = valueAfterLoss * 0.75;
+
+            document.getElementById('result').textContent = `Rebuilt Title Value: $${rebuiltValue.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
